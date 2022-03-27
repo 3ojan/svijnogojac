@@ -1,24 +1,23 @@
+import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/styles/tailwind.css";
+import "./assets/styles/custom.css";
+import store, { history } from './components/store';
+import Sidebar from './components/Sidebar/Sidebar';
+import Profile from './components/Profile/Profile';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import Newad from './components/pages/insert/Newad';
+import Login from './components/Login';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    </>
+
   );
 }
 
