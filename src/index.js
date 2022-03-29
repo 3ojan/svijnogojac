@@ -16,6 +16,10 @@ import Newad from './components/pages/insert/Newad';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar/Sidebar';
 import Register from './components/Register';
+import Newarticle from './components/pages/insert/Newarticle';
+import ViewAds from './components/pages/Ads/ViewAds';
+import ViewArticles from './components/pages/Articles/ViewArticles';
+import NewCategory from './components/pages/insert/NewCategory';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -30,6 +34,10 @@ ReactDOM.render(
           <Route path="/newad" element={<Newad />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/newarticle" element={<Newarticle />} />
+          <Route exact path="/viewads" element={<ViewAds />} />
+          <Route exact path="/viewartciles" element={<ViewArticles />} />
+          <Route exact path="/newcategory" element={<NewCategory />} />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -38,7 +38,7 @@ function Login(props) {
     props.auth();
 
     if (user.token) {
-      history('/sidebar');
+      history('/newad');
     }
   }, [user.token]);
 

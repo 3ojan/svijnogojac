@@ -1,28 +1,22 @@
 import axios from "axios";
 const wpUrl = "http://localhost:8666";
-
 export const GET_USERS = 'GET_USERS';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const SET_USERS = 'SET_USERS';
 export const USERS_ERROR = 'USERS_ERROR';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 
-const baseUrl = "http://localhost:2999";
+export const baseUrl = "http://localhost:2999";
+
+
 const registerUserData = {
   email: "test@test.hr",
   password: "1234",
   firstName: "test",
   lastName: "user"
 }
-const newItem = {
-  article: "article",
-  owner: "bojan",
-  entryDate: new Date(),
-  origin: "EU",
-  wantedPrice: "100",
-  finishDate: new Date(),
-  comment: "comment",
-}
+
 let token = localStorage.getItem("svinje-token");
 
 export const login = () => async dispatch => {
@@ -66,7 +60,10 @@ export const auth = () => async dispatch => {
   axios.get(`${baseUrl}/auth`)
     .then(res => {
       if (res.data.success === true) {
-        console.log(res.data)
+        dispatch({
+          type: USER_LOGIN_SUCCESS,
+          payload: res.data
+        });
       } else {
         console.log(res)
 
@@ -80,46 +77,32 @@ export const auth = () => async dispatch => {
       })
 };
 
-
-export const storeNewItem = () => async dispatch => {
-  try {
-    axios.post(`${baseUrl}/newad`, newItem)
-      .then(res => {
-        if (res.data.success === true) {
-          // dispatch({
-          //   type: USER_LOGIN_SUCCESS,
-          //   payload: res.data
-          // });
-          // localStorage.setItem('token', res.data.token);
-
-        } else {
-        }
-      })
-  } catch (e) {
-    // dispatch({
-    //   type: USERS_ERROR,
-    //   payload: console.log(e)
-    // });
+export const logout = (callback) => async dispatch => {
+  if (token) {
+    axios.defaults.headers.common = {
+      'Authorization': `Bearer ${token}`
+    }
   }
-};
-export const storeArticle = () => async dispatch => {
-  try {
-    axios.post(`${baseUrl}/newArticle`, { name: "kukuruz" })
-      .then(res => {
-        if (res.data.success === true) {
-          // dispatch({
-          //   type: USER_LOGIN_SUCCESS,
-          //   payload: res.data
-          // });
-          // localStorage.setItem('token', res.data.token);
+  axios.get(`${baseUrl}/logout`)
+    .then(res => {
+      if (res.data.success === true) {
+        localStorage.removeItem("svinje-token");
+        token = null;
+        dispatch({
+          type: USER_LOGOUT_SUCCESS,
+          payload: res.data
+        });
+        callback && callback();
+      } else {
+        console.log(res)
 
-        } else {
-        }
+      }
+    },
+      error => {
+        dispatch({
+          type: AUTH_FAILED,
+        });
       })
-  } catch (e) {
-    // dispatch({
-    //   type: USERS_ERROR,
-    //   payload: console.log(e)
-    // });
-  }
 };
+
+

@@ -1,4 +1,4 @@
-import { USER_LOGIN_SUCCESS, AUTH_FAILED } from '../actions/userAction'
+import { USER_LOGIN_SUCCESS, AUTH_FAILED, USER_LOGOUT_SUCCESS } from '../actions/userAction'
 
 // email: "test@test.hr"
 // firstName: "test"
@@ -23,6 +23,10 @@ const userReducer = (state = initialState, action) => {
         userData: action.payload.userData,
         token: action.payload.token,
         loading: false
+      }
+    case USER_LOGOUT_SUCCESS:
+      return {
+        ...initialState
       }
     case AUTH_FAILED:
       return {

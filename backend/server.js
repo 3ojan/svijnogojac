@@ -10,6 +10,7 @@ const saltRounds = 10;
 var User = require('./models/user.js');
 var Ad = require('./models/ad.js');
 var Articles = require('./models/articles.js');
+var Category = require('./models/category.js');
 
 // Set Application Port
 const PORT = process.env.PORT || 2999;
@@ -71,31 +72,42 @@ app.post("/register", (req, res, next) => {
       role: 1
     }
 
-    User.create(userData, (err, user) => {
-      if (err) {
-        return next(err);
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if (user) {
+        return res.json({
+          success: false,
+          message: "Korisnik pod ovim emailom postoji postoji"
+        })
       } else {
+        User.create(userData, (err, user) => {
+          if (err) {
+            return next(err);
+          } else {
 
-        const userObject = {
-          _id: user._id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          role: user.role
-        }
+            const userObject = {
+              _id: user._id,
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              role: user.role
+            }
 
-        // create token
-        let token = jwt.sign(userObject, app.get("appSecret"));
+            // create token
+            let token = jwt.sign(userObject, app.get("appSecret"));
 
-        return res.status(200).cookie('access_token', token, {
-          maxAge: 3600000,
-          httpOnly: true,
-          // secure: true
-        }).json({
-          success: true
+            return res.status(200).cookie('access_token', token, {
+              maxAge: 3600000,
+              httpOnly: true,
+              // secure: true
+            }).json({
+              success: true
+            })
+          }
         })
       }
     })
+
+
   })
 })
 app.post("/newad", (req, res, next) => {
@@ -104,9 +116,12 @@ app.post("/newad", (req, res, next) => {
   if (
     isEmpty(req.body.entryDate) ||
     isEmpty(req.body.owner) ||
+    isEmpty(req.body.ownerId) ||
     isEmpty(req.body.article) ||
     isEmpty(req.body.origin) ||
     isEmpty(req.body.wantedPrice) ||
+    isEmpty(req.body.category) ||
+    isEmpty(req.body.amount) ||
     isEmpty(req.body.finishDate)
   ) {
     return res.json({
@@ -119,13 +134,20 @@ app.post("/newad", (req, res, next) => {
     entryDate: req.body.entryDate,
     owner: req.body.owner,
     article: req.body.article,
+    category: req.body.category,
     origin: req.body.origin,
     wantedPrice: req.body.wantedPrice,
     finishDate: req.body.finishDate,
     comment: req.body.comment,
+    ownerId: req.body.ownerId,
+    amount: req.body.amount,
+    status: req.body.adStatus || 1,
+    buysell: req.body.buysell || 1,
   }
 
-  Ad.create(data, (err, newAd) => {
+  console.log(data)
+
+  Ad.create(data, (err) => {
     if (err) {
       return next(err);
     } else {
@@ -146,12 +168,54 @@ app.post("/newarticle", (req, res, next) => {
       message: "name is required"
     })
   }
+  var id = req.body.category;
+  var data = {
+    name: req.body.name,
+    category: req.body.category,
+
+  }
+  Category.findById(id, function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      data.categoryName = result.name;
+      data.unit = result.unit;
+
+      Articles.create(data, (error) => {
+        if (error) {
+          return next(error);
+        } else {
+          return res.json({
+            success: true,
+          })
+        }
+      });
+    }
+  });
+
+
+
+});
+
+app.post("/newcategory", (req, res, next) => {
+  // making sure none of the fields are empty
+  console.log(res.body)
+  if (
+    isEmpty(req.body.name)
+  ) {
+    return res.json({
+      success: false,
+      message: "name is required"
+    })
+  }
 
   var data = {
     name: req.body.name,
+    unit: req.body.unit,
   }
 
-  Articles.create(data, (err, newAd) => {
+  Category.create(data, (err) => {
     if (err) {
       return next(err);
     } else {
@@ -160,6 +224,18 @@ app.post("/newarticle", (req, res, next) => {
       })
     }
   });
+});
+app.get("/categories", (req, res) => {
+  Category.find({}, (err, categories) => {
+    if (err) {
+      throw new Error(`Can't get user data.`);
+    }
+
+    return res.status(200).send({
+      success: true,
+      categories
+    })
+  })
 });
 
 
@@ -172,6 +248,18 @@ app.get("/articles", (req, res) => {
     return res.status(200).send({
       success: true,
       articles
+    })
+  })
+});
+app.get("/ads", (req, res) => {
+  Ad.find({}, (err, ads) => {
+    if (err) {
+      throw new Error(`Can't get ads data.`);
+    }
+
+    return res.status(200).send({
+      success: true,
+      ads
     })
   })
 });
@@ -239,7 +327,7 @@ app.post("/login", (req, res) => {
 
 
 app.get("/logout", (req, res) => {
-  let token = req.cookies.access_token
+  const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
   // decode token
   if (token) {
@@ -286,7 +374,8 @@ app.get("/auth", (req, res) => {
         // if everything is good, save to request for use in other routes
         return res.status(200).send({
           success: true,
-          userData: decoded
+          userData: decoded,
+          token
         })
       }
     })
