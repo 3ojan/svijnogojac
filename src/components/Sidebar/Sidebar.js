@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router';
+import Notifications from '../notifications/Notifications';
 import { logout } from '../store/actions/userAction'
 
 // import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";

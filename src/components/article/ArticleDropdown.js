@@ -37,7 +37,7 @@ function ArticleDropdown(props) {
             value={selecteditem ? selecteditem : items[0]._id}
           >
             {items && items.map(item => {
-              return <option value={item._id}>{item.name}</option>
+              return <option value={item._id} key={item._id}>{item.name}</option>
             })}}
           </select>
         </div>

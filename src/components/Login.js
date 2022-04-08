@@ -69,11 +69,11 @@ function Login(props) {
           <div className="flex flex-col bg-white p-10 rounded-lg shadow space-y-6">
             <h1 className="font-bold text-xl text-center">Prijava</h1>
             <div className="flex flex-col space-y-1">
-              <input type="text" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Korisničko ime" onChange={(e => { onChangeData("email", e) })} value={inputData.email} defaultValue="" />
+              <input type="text" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Korisničko ime" onChange={(e => { onChangeData("email", e) })} value={inputData.email} />
             </div>
 
             <div className="flex flex-col space-y-1">
-              <input type="password" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Password" onChange={(e => { onChangeData("password", e) })} value={inputData.password} defaultValue="" />
+              <input type="password" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Password" onChange={(e => { onChangeData("password", e) })} value={inputData.password} />
             </div>
 
             <div className="relative">

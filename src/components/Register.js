@@ -1,9 +1,54 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from "./store/actions/userAction"
 import axios from "axios"
 
 function Register(props) {
+
+  const [inputData, setinputData] = useState({
+    email: null,
+    password: null,
+    role: null,
+    lastName: null,
+    firstName: null,
+  });
+
+  const onChangeData = (type, e) => {
+    switch (type) {
+      case "email":
+        setinputData({
+          ...inputData,
+          ...{ email: e.target.value }
+        })
+        break;
+      case "password":
+        setinputData({
+          ...inputData,
+          ...{ password: e.target.value },
+        })
+        break;
+      case "role":
+        setinputData({
+          ...inputData,
+          ...{ password: e.target.value },
+        })
+        break;
+      case "lastName":
+        setinputData({
+          ...inputData,
+          ...{ lastName: e.target.value },
+        })
+        break;
+      case "firstName":
+        setinputData({
+          ...inputData,
+          ...{ firstName: e.target.value },
+        })
+        break;
+      default:
+        break;
+    }
+  }
 
   useEffect(() => {
   }, []);
@@ -15,7 +60,8 @@ function Register(props) {
       firstName: "test",
       lastName: "user"
     }
-    axios.post("http://localhost:2999/register", registerUserData)
+
+    axios.post("http://localhost:2999/register", inputData || registerUserData)
       .then(res => {
         console.log(res)
         if (res.data.success === true) {
@@ -38,20 +84,20 @@ function Register(props) {
           <div className="flex flex-col bg-white p-10 rounded-lg shadow space-y-6">
             <h1 className="font-bold text-xl text-center">Registracija novog korisnika</h1>
             <div className="flex flex-col space-y-1">
-              <input type="text" name="email" id="email" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="email" />
+              <input type="text" name="email" id="email" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="email" onChange={(e => { onChangeData("email", e) })} />
             </div>
             <div className="flex flex-col space-y-1">
-              <input type="text" name="firstname" id="firstname" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="firstname" />
+              <input type="text" name="firstname" id="firstname" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="firstname" onChange={(e => { onChangeData("firstName", e) })} />
             </div>
             <div className="flex flex-col space-y-1">
-              <input type="text" name="lastname" id="lastname" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="lastname" />
+              <input type="text" name="lastname" id="lastname" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="lastname" onChange={(e => { onChangeData("lastName", e) })} />
             </div>
             <div className="flex flex-col space-y-1">
-              <input type="text" name="role" id="role" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="role" />
+              <input type="text" name="role" id="role" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="role" onChange={(e => { onChangeData("role", e) })} />
             </div>
 
             <div className="flex flex-col space-y-1">
-              <input type="password" name="password" id="password" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Password" />
+              <input type="password" name="password" id="password" className="border-2 rounded px-3 py-2 w-full focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Password" onChange={(e => { onChangeData("password", e) })} />
             </div>
 
             {/* <div className="relative">

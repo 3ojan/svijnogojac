@@ -20,9 +20,11 @@ import Newarticle from './components/pages/insert/Newarticle';
 import ViewAds from './components/pages/Ads/ViewAds';
 import ViewArticles from './components/pages/Articles/ViewArticles';
 import NewCategory from './components/pages/insert/NewCategory';
+import Editad from './components/pages/Ads/Editad';
+import Notifications from './components/notifications/Notifications';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <App>
     <Provider store={store}>
       <App></App>
       <BrowserRouter history={history}>
@@ -38,10 +40,12 @@ ReactDOM.render(
           <Route exact path="/viewads" element={<ViewAds />} />
           <Route exact path="/viewartciles" element={<ViewArticles />} />
           <Route exact path="/newcategory" element={<NewCategory />} />
+          <Route exact path="/viewads/:id" element={<Editad />} />
         </Routes>
       </BrowserRouter>
+      <Notifications></Notifications>
     </Provider>
-  </React.StrictMode>
+  </App>
   ,
   document.getElementById('root')
 );

@@ -7,6 +7,7 @@ import ArticleDropdown from '../../article/ArticleDropdown';
 import { getArticleName } from '../../store/reducers/articleReducer';
 import ArticleTable from '../../Tables/ArticleTable';
 import ImageUpload from '../../imageupload/ImageUpload';
+import { useNavigate } from 'react-router';
 // components
 
 function ViewAds(props) {
@@ -33,30 +34,42 @@ function ViewAds(props) {
 
   });
 
+  const onAdsAndArticlesLoaded = () => {
+    if (ads && articles) {
+
+      const buyItems = ads.filter(item => item.buysell === 1);
+      const sellItems = ads.filter(item => item.buysell === 2);
+      const activeItems = ads.filter(item => item.status === 1);
+      const inActiveItems = ads.filter(item => item.status === 2);
+      const ended = ads.filter(item => item.status === 3);
+
+      setItems({
+        all: ads,
+        buy: buyItems,
+        sell: sellItems,
+        activeItems,
+        inActiveItems,
+        ended
+      });
+    }
+  }
+
   useEffect(() => {
     if (!ads) {
       props.getAdds();
+
+    } else {
+      onAdsAndArticlesLoaded()
+    }
+  }, [ads]);
+
+  useEffect(() => {
+    if (!articles) {
       props.getArticle();
     } else {
-      if (ads && articles) {
-
-        const buyItems = ads.filter(item => item.buysell === 1);
-        const sellItems = ads.filter(item => item.buysell === 2);
-        const activeItems = ads.filter(item => item.status === 1);
-        const inActiveItems = ads.filter(item => item.status === 2);
-        const ended = ads.filter(item => item.status === 3);
-
-        setItems({
-          all: ads,
-          buy: buyItems,
-          sell: sellItems,
-          activeItems,
-          inActiveItems,
-          ended
-        });
-      }
+      onAdsAndArticlesLoaded()
     }
-  }, [ads, articles]);
+  }, [articles]);
 
   const onSelectArticle = (articleId) => {
     let articleItems;

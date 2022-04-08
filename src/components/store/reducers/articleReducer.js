@@ -1,4 +1,4 @@
-import { GET_ARTICLES_SUCCESS, GET_ADS_SUCCESS, GET_CATEGORIES_SUCCESS } from "../actions/articleAction"
+import { GET_ARTICLES_SUCCESS, GET_ADS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_AD_BY_ID_SUCCESS } from "../actions/articleAction"
 
 
 const initialState = {
@@ -6,6 +6,8 @@ const initialState = {
   loading: true,
   ads: null,
   categories: null,
+
+  editedAd: null,
 }
 
 let names = {};
@@ -24,6 +26,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         ads: action.payload,
+        loading: false
+      }
+    case GET_AD_BY_ID_SUCCESS:
+      return {
+        ...state,
+        editedAd: action.payload,
         loading: false
       }
     case GET_CATEGORIES_SUCCESS:

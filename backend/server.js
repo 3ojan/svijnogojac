@@ -4,7 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser")
-
+const { ObjectID } = require("mongodb");
 const saltRounds = 10;
 
 var User = require('./models/user.js');
@@ -193,9 +193,6 @@ app.post("/newarticle", (req, res, next) => {
       });
     }
   });
-
-
-
 });
 
 app.post("/newcategory", (req, res, next) => {
@@ -251,6 +248,72 @@ app.get("/articles", (req, res) => {
     })
   })
 });
+app.get("/ads", (req, res) => {
+  Ad.find({}, (err, ads) => {
+    if (err) {
+      throw new Error(`Can't get ads data.`);
+    }
+
+    return res.status(200).send({
+      success: true,
+      ads
+    })
+  })
+});
+app.post("/updateAds", (req, res) => {
+  var data = {
+    entryDate: req.body.entryDate,
+    owner: req.body.owner,
+    article: req.body.article,
+    category: req.body.category,
+    origin: req.body.origin,
+    wantedPrice: req.body.wantedPrice,
+    finishDate: req.body.finishDate,
+    comment: req.body.comment,
+    ownerId: req.body.ownerId,
+    amount: req.body.amount,
+    status: req.body.adStatus || 1,
+    buysell: req.body.buysell || 1,
+  }
+
+  // Ad.updateOne({ _id: req.body._id }, {
+  //   $set: {
+  //     ...data
+  //   }
+  // }).then((req, res) => {
+  //   console.log(req, res)
+  //   return res.status(200).send({
+  //     success: true,
+  //   })
+  // })
+  try {
+    Ad.findOneAndUpdate(
+      { _id: req.body._id },
+      { $set: { ...data } }, null
+    ).then((result, req) => {
+      return res.status(200).send({
+        success: true,
+      })
+    })
+  } catch (e) {
+  }
+});
+
+app.get("/ads/:id", async (req, res) => {
+  let id = req.params.id;
+  Ad.findById(id, function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      return res.status(200).send({
+        success: true,
+        result
+      })
+    }
+  });
+});
+
 app.get("/ads", (req, res) => {
   Ad.find({}, (err, ads) => {
     if (err) {
@@ -403,6 +466,19 @@ app.get("/emails", (req, res) => {
     return res.status(200).send({
       success: true,
       userEmails: userEmails
+    })
+  })
+})
+
+app.get("/users", (req, res) => {
+  User.find({}, (err, users) => {
+    if (err) {
+      throw new Error(`Can't get user data.`);
+    }
+
+    return res.status(200).send({
+      success: true,
+      users
     })
   })
 })

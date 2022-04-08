@@ -1,4 +1,4 @@
-import { USER_LOGIN_SUCCESS, AUTH_FAILED, USER_LOGOUT_SUCCESS } from '../actions/userAction'
+import { USER_LOGIN_SUCCESS, AUTH_FAILED, USER_LOGOUT_SUCCESS, SET_USERS } from '../actions/userAction'
 
 // email: "test@test.hr"
 // firstName: "test"
@@ -8,12 +8,14 @@ import { USER_LOGIN_SUCCESS, AUTH_FAILED, USER_LOGOUT_SUCCESS } from '../actions
 // _id: "62390c0905eb689c461bfd99"
 
 const initialState = {
-  users: [],
   loading: true,
   userData: null,
   // token: localStorage.getItem("svinje-token"),
   token: null,
+  users: null,
 }
+let names = {};
+let users = [];
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -35,8 +37,26 @@ const userReducer = (state = initialState, action) => {
         token: null,
         loading: false
       }
+    case SET_USERS:
+      users = action.payload.users;
+      return {
+        ...state,
+        users: action.payload.users,
+        loading: false
+      }
     default: return state
   }
+}
+
+export const getUserFullName = (id) => {
+  if (names[id]) {
+    return names[id];
+  }
+  const item = users.filter(item => item._id === id);
+  if (item[0]) {
+    names[id] = `${item[0].firstName} ${item[0].lastName}`
+  }
+  return names[id];
 }
 
 export default userReducer

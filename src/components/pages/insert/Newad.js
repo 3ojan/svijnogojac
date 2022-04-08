@@ -23,23 +23,7 @@ const _items = [
     name: "AU"
   },
 ]
-const dropDownOrigin = (callback, defaultValue, value) => (
-  <div >
-    <div className="mb-3 xl:w-96">
-      <select className={dropDownClassName} aria-label="Default select example" onChange={callback}
-        value={value}
-      >
-        <option value="HR">HR</option>
-        <option value="EU">EU</option>
-        <option value="AU">AU</option>
-      </select>
-    </div>
-  </div>
-)
 
-const dropDown = (onCallback) => (
-  <ArticleDropdown onSelect={onCallback}></ArticleDropdown>
-)
 
 function Newad(props) {
 
@@ -126,7 +110,10 @@ function Newad(props) {
   }
 
   const onSubmit = () => {
-    props.storeNewItem(submitData);
+    const callback = () => {
+      history('/viewads');
+    }
+    props.storeNewItem(submitData, callback);
   }
 
   return (
@@ -174,7 +161,7 @@ function Newad(props) {
                       </label>
                       <div className="relative">
 
-                        <div class="flex">
+                        <div className="flex">
                           <div className="form-check form-check-inline">
                             <input className={radioButtonInputCss} type="radio" name="inlineRadioOptions2" id="buy" value="1" onChange={(e) => { (onChangeData("buysell", e)) }} checked={submitData.buysell === "1"} />
                             <label className="form-check-label inline-block text-gray-800" htmlFor="buy">Ponuda</label>

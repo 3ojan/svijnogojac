@@ -17,6 +17,7 @@ const registerUserData = {
   lastName: "user"
 }
 
+
 let token = localStorage.getItem("svinje-token");
 
 export const login = () => async dispatch => {
@@ -106,3 +107,23 @@ export const logout = (callback) => async dispatch => {
 };
 
 
+export const getUsers = () => async dispatch => {
+  axios.get(`${baseUrl}/users`)
+    .then(res => {
+      if (res.data.success === true) {
+        dispatch({
+          type: SET_USERS,
+          payload: res.data
+        });
+      } else {
+        console.log(res)
+
+      }
+    },
+      error => {
+        dispatch({
+          type: "USERS_GET_FAILED",
+        });
+        // console.error('onRejected function called: ' + error.message);
+      })
+};
