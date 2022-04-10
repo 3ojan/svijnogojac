@@ -1,4 +1,6 @@
 import axios from "axios";
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
 const wpUrl = "http://localhost:8666";
 export const GET_USERS = 'GET_USERS';
 export const AUTH_FAILED = 'AUTH_FAILED';
@@ -31,6 +33,7 @@ export const login = () => async dispatch => {
       .then(res => {
         if (res.data.success === true) {
           if (res.data.token) {
+            NotificationManager.success("Korsnik ulogiran");
             token = res.data.token;
             localStorage.setItem("svinje-token", token);
             axios.defaults.headers.common = {
@@ -61,13 +64,14 @@ export const auth = () => async dispatch => {
   axios.get(`${baseUrl}/auth`)
     .then(res => {
       if (res.data.success === true) {
+        NotificationManager.success("Autorizacija uspješna!");
         dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: res.data
         });
       } else {
         console.log(res)
-
+        NotificationManager.error("Greška u autoriziranju korisnika!");
       }
     },
       error => {
@@ -93,6 +97,7 @@ export const logout = (callback) => async dispatch => {
           type: USER_LOGOUT_SUCCESS,
           payload: res.data
         });
+        NotificationManager.success("Odjava uspješna!");
         callback && callback();
       } else {
         console.log(res)
@@ -111,6 +116,7 @@ export const getUsers = () => async dispatch => {
   axios.get(`${baseUrl}/users`)
     .then(res => {
       if (res.data.success === true) {
+        NotificationManager.success("Korisnici učitani!");
         dispatch({
           type: SET_USERS,
           payload: res.data

@@ -29,6 +29,7 @@ export const storeArticle = (article) => async dispatch => {
           console.log("success")
 
         } else {
+          NotificationManager.error("Greška u spremanju artikla!");
         }
       })
   } catch (e) {
@@ -50,13 +51,11 @@ export const getArticle = () => async dispatch => {
           });
 
         } else {
+          NotificationManager.error("Greška u dohvaćanju artikla!");
         }
       })
   } catch (e) {
-    // dispatch({
-    //   type: USERS_ERROR,
-    //   payload: console.log(e)
-    // });
+
   }
 };
 
@@ -98,12 +97,6 @@ export const editExistingAd = (item, callback) => async dispatch => {
         callback && callback();
         if (res.data.success === true) {
           NotificationManager.success("Oglas spremljen", "Editiranje");
-          // dispatch({
-          //   type: USER_LOGIN_SUCCESS,
-          //   payload: res.data
-          // });
-          // localStorage.setItem('token', res.data.token);
-
         } else {
         }
       })
