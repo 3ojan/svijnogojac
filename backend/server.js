@@ -36,15 +36,13 @@ function isEmpty(str) {
 
 
 // Express will serve up production assets
-app.use(express.static(path.join(__dirname, '../build')))
+app.use(express.static('build'));
 
-app.get('*', (_, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+// Express serve up index.html file if it doesn't recognize route
+const path = require('path');
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 
 mongoose.set('useCreateIndex', true)
 const configDB = require('./config/database.js')
