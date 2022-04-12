@@ -38,7 +38,7 @@
     "build": "craco build --max_old_space_size=2560",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build && npm start"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": [
