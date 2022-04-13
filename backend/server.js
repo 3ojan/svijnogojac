@@ -13,7 +13,7 @@ var Articles = require('./models/articles.js');
 var Category = require('./models/category.js');
 
 // Set Application Port
-const PORT = process.env.PORT || 2999;
+const PORT = process.env.PORT || 5000;
 
 // create express app
 const app = express()
