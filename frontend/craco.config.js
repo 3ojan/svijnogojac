@@ -1,3 +1,5 @@
+const path = require('path');
+
 // craco.config.js
 module.exports = {
   style: {
@@ -8,4 +10,11 @@ module.exports = {
       ],
     },
   },
+  webpack: {
+    configure: (webpackConfig, { env, paths }) => { 
+        paths.appBuild = webpackConfig.output.path = path.resolve('build');
+
+        return webpackConfig;  // Important: return the modified config
+    }
+}
 }
