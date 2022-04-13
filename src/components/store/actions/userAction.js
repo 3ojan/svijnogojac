@@ -22,14 +22,14 @@ const registerUserData = {
 
 let token = localStorage.getItem("svinje-token");
 
-export const login = () => async dispatch => {
+export const login = (data, callback) => async dispatch => {
   if (token) {
     axios.defaults.headers.common = {
       'Authorization': `Bearer ${token}`
     }
   }
   try {
-    axios.post(`${baseUrl}/login`, registerUserData)
+    axios.post(`${baseUrl}/login`, data)
       .then(res => {
         if (res.data.success === true) {
           if (res.data.token) {
@@ -44,9 +44,14 @@ export const login = () => async dispatch => {
             type: USER_LOGIN_SUCCESS,
             payload: res.data
           });
+          callback && callback();
           // localStorage.setItem('token', res.data.token);
 
-        } else {
+        }
+        if (res.data.success === false) {
+          NotificationManager.error(res.data.message);
+        }
+        else {
         }
       })
   } catch (e) {
@@ -130,6 +135,21 @@ export const getUsers = () => async dispatch => {
         dispatch({
           type: "USERS_GET_FAILED",
         });
+        // console.error('onRejected function called: ' + error.message);
+      })
+};
+export const getUserAds = (id, callback) => async dispatch => {
+  axios.get(`${baseUrl}/getownerads/${id}`)
+    .then(res => {
+      if (res.data.success === true) {
+        NotificationManager.success("Oglasi učitani!");
+        callback(res.data.ads)
+      } else {
+        console.log(res)
+
+      }
+    },
+      error => {
         // console.error('onRejected function called: ' + error.message);
       })
 };

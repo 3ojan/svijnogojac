@@ -45,7 +45,7 @@ const tableRow = (color, data, history) => {
       </span>
     </td>
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      {data.wantedPrice}
+      {data.amount}
     </td>
     {dataStatus(data)}
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
@@ -67,7 +67,11 @@ const tableRow = (color, data, history) => {
       {data.comment}
     </td>
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      <button onClick={() => { history(`/viewads/${data._id}`) }}>{"edit"}</button>
+      <button
+        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        type="button"
+        onClick={() => { history(`/viewads/${data._id}`) }}>{"Uredi"}
+      </button>
     </td>
   </tr>)
 }

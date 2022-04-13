@@ -4,10 +4,9 @@ import DatePicker from "react-datepicker";
 import { connect, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import "react-datepicker/dist/react-datepicker.css";
-import { radioButtonInputCss, inputClassName, dropDownClassName } from "../insert/NewAd.syled.css.js";
+import { radioButtonInputCss, inputClassName } from "../insert/NewAd.syled.css.js";
 import { storeNewItem, getArticle, getCategories, getAdById, editExistingAd, getAdds } from "../../store/actions/articleAction.js";
 import { getUsers } from "../../store/actions/userAction";
-import ArticleDropdown from "../../article/ArticleDropdown.js";
 import Dropdown from "../../dropdown/Dropdown.js";
 import { getUserFullName } from "../../store/reducers/userReducer.js";
 
@@ -30,7 +29,6 @@ const _items = [
 function Editad(props) {
   console.log(props)
   const params = useParams();
-  window.params = params;
   console.log(params.id)
 
   const history = useNavigate();
@@ -163,7 +161,7 @@ function Editad(props) {
   const onSubmit = () => {
     const callback = () => {
       props.getAdds();
-      history('/viewads');
+      history('/ponuda');
     }
     props.editExistingAd(submitData, callback);
   }
@@ -246,13 +244,13 @@ function Editad(props) {
                       >
                         Vlasnik oglasa
                       </label>
-                      <input
+                      {/* <input
                         type="text"
                         className={inputClassName}
                         placeholder="Full Name"
                         value={submitData.owner || ""}
                         disabled
-                      />
+                      /> */}
                       <Dropdown items={fetchedUsers} onSelect={(data) => { onSelectDropDownOwner(data) }} selectedItem={submitData.ownerId} notfound={"nema spremljenih korisnika"}></Dropdown>
                     </div>
 
