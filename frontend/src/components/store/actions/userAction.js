@@ -9,7 +9,7 @@ export const USERS_ERROR = 'USERS_ERROR';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 
-export const baseUrl = "https://immense-forest-19567.herokuapp.com:5000'";
+export const baseUrl = "https://immense-forest-19567.herokuapp.com:5000";
 
 
 const registerUserData = {
