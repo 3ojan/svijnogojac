@@ -414,7 +414,7 @@ app.post("/login", (req, res) => {
       if (user == undefined) {
         return res.json({
           success: false,
-          message: "Sorry, wrong email"
+          message: "Neispravni podatci"
         })
       }
 

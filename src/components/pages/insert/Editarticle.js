@@ -5,8 +5,8 @@ import { connect, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 
 import "react-datepicker/dist/react-datepicker.css";
-import { inputClassName, buttonSubmitClassName, dropDownClassName } from "./NewAd.syled.css.js";
-import { getCategories, updateArticle, getArticleById } from "../../store/actions/articleAction";
+import { inputClassName, buttonSubmitClassName, dropDownClassName, btnDeleteClassName } from "./NewAd.syled.css.js";
+import { getCategories, updateArticle, getArticleById, deleteArticle } from "../../store/actions/articleAction";
 import { getCategoryName } from "../../store/reducers/articleReducer.js";
 // components
 
@@ -75,6 +75,12 @@ function Editarticle(props) {
       categoryName: getCategoryName(categorySelect),
       name: articleName, category: categorySelect
     }, callback);
+  }
+
+  const onDelete = () => {
+    props.deleteArticle(params.id, () => {
+      history('/viewarticles');
+    })
   }
 
   return (
@@ -162,6 +168,13 @@ function Editarticle(props) {
                       >
                         Spremi Artikal
                       </button>
+                      <button
+                        className={btnDeleteClassName(true)}
+                        type="submit"
+                        onClick={onDelete}
+                      >
+                        Obriši artikal
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -175,4 +188,4 @@ function Editarticle(props) {
 }
 
 const mapStateToProps = (state) => ({})
-export default connect(mapStateToProps, { getCategories, updateArticle, getArticleById })(Editarticle)
+export default connect(mapStateToProps, { getCategories, updateArticle, getArticleById, deleteArticle })(Editarticle)
