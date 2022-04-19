@@ -11,10 +11,10 @@ module.exports = {
     },
   },
   webpack: {
-    configure: (webpackConfig, { env, paths }) => { 
-        paths.appBuild = webpackConfig.output.path = path.resolve('build');
+    configure: (webpackConfig, { env, paths }) => {
+      paths.appBuild = webpackConfig.output.path = path.resolve('build');
 
-        return webpackConfig;  // Important: return the modified config
+      return webpackConfig;  // Important: return the modified config
     }
-}
+  }
 }
