@@ -12,6 +12,10 @@ var UserSchema = new mongoose.Schema({
   unit: {
     type: String,
   },
+  active: {
+    type: Boolean, // Number type
+    default: true,
+  },
 });
 var Articles = mongoose.model('Articles', UserSchema);
 module.exports = Articles;

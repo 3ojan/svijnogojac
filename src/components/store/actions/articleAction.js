@@ -234,7 +234,6 @@ export const deleteArticle = (id, callback) => async dispatch => {
         console.log(res)
       }
     },
-
       error => {
         // console.error('onRejected function called: ' + error.message);
       })

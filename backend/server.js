@@ -247,7 +247,7 @@ app.get("/categories", (req, res) => {
 
 
 app.get("/articles", (req, res) => {
-  Articles.find({}, (err, articles) => {
+  Articles.find({ active: true }, (err, articles) => {
     if (err) {
       throw new Error(`Can't get user data.`);
     }
@@ -255,6 +255,17 @@ app.get("/articles", (req, res) => {
     return res.status(200).send({
       success: true,
       articles
+    })
+  })
+});
+app.get("/articles/:articleId", (req, res) => {
+  Articles.find({ _id: req.params.articleId, active: true }, (err, ads) => {
+    if (err) {
+      throw new Error(`Can't get user data.`);
+    }
+    return res.status(200).send({
+      success: true,
+      ads
     })
   })
 });
@@ -337,6 +348,59 @@ app.get("/ads", (req, res) => {
   })
 });
 
+app.get("/getownerads/:ownerId", (req, res) => {
+  Ad.find({ ownerId: req.params.ownerId }, (err, ads) => {
+    if (err) {
+      throw new Error(`Can't get user data.`);
+    }
+    return res.status(200).send({
+      success: true,
+      ads
+    })
+  })
+});
+
+app.get("/getarticleads/:articleId", (req, res) => {
+  Ad.find({ article: req.params.articleId }, (err, ads) => {
+    if (err) {
+      throw new Error(`Can't get user data.`);
+    }
+    return res.status(200).send({
+      success: true,
+      ads
+    })
+  })
+});
+
+app.get("/deletearticle/:articleId", (req, res) => {
+  Articles.findOneAndUpdate(
+    { _id: req.params.articleId },
+    { $set: { active: false } }, null
+  ).then((result, req) => {
+    return res.status(200).send({
+      success: true,
+    })
+  })
+});
+app.post("/updatearticle/:articleId", (req, res) => {
+  var data = {
+    name: req.body.name,
+    category: req.body.category,
+    active: req.body.active || true,
+    categoryName: req.body.categoryName
+  }
+  console.log(data)
+  Articles.findOneAndUpdate(
+    { _id: req.params.articleId },
+    { $set: { ...data } }, null
+  ).then((result, req) => {
+    console.log(result, req)
+    return res.status(200).send({
+      success: true,
+    })
+  })
+});
+
 app.get("/test", (req, res) => {
   res.send('Hello from B!')
 });
@@ -360,7 +424,7 @@ app.post("/login", (req, res) => {
       if (user == undefined) {
         return res.json({
           success: false,
-          message: "Sorry, wrong email"
+          message: "Neispravni podatci"
         })
       }
 
@@ -485,10 +549,22 @@ app.get("/users", (req, res) => {
     if (err) {
       throw new Error(`Can't get user data.`);
     }
-
     return res.status(200).send({
       success: true,
       users
+    })
+  })
+});
+
+app.get("/adsbyarticle/:article", (req, res) => {
+  console.log(req.params.article)
+  Ad.find({ article: req.params.article }, (err, ads) => {
+    if (err) {
+      throw new Error(`Can't get user data.`);
+    }
+    return res.status(200).send({
+      success: true,
+      ads
     })
   })
 })
