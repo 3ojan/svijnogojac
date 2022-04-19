@@ -22,7 +22,7 @@ import ViewArticles from './components/pages/Articles/ViewArticles';
 import NewCategory from './components/pages/insert/NewCategory';
 import Editad from './components/pages/Ads/Editad';
 import Notifications from './components/notifications/Notifications';
-import Ponuda from './components/pages/Ads/Ponuda';
+import Ponuda from './components/pages/Ads/Pgit add onuda';
 import Users from './components/pages/Users/Users';
 import UserAds from './components/pages/Users/UserAds';
 import ArticleAds from './components/pages/Users/ArticleAds';
