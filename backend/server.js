@@ -36,7 +36,7 @@ function isEmpty(str) {
 
 
 // Express will serve up production assets
-app.use(express.static('frontend/build'));
+app.use(express.static('/frontend/build'));
 
 // Express serve up index.html file if it doesn't recognize route
 const path = require('path');
