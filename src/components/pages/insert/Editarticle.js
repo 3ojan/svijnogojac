@@ -20,7 +20,7 @@ const categoryDropDown = (items, callback, slectedValue) => {
         >
           {items && items.map(item => {
             return <option key={item._id} value={item._id}>{item.name}</option>
-          })}}
+          })}
         </select>
       </div>
       : <div>Nema spremljenih kategorija</div>}
