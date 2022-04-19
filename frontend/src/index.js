@@ -31,16 +31,16 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/sidebar" element={<Sidebar />} />
-          <Route exact path="profile" element={<Profile />} />
-          <Route exact path="dashboard" element={<Dashboard />} />
-          <Route path="newad" element={<Newad />} />
-          <Route path="https://immense-forest-19567.herokuapp.com/login" element={<Login />} />
-          <Route exact path="https://immense-forest-19567.herokuapp.com/register" element={<Register />} />
-          <Route exact path="newarticle" element={<Newarticle />} />
-          <Route exact path="viewads" element={<ViewAds />} />
-          <Route exact path="viewartciles" element={<ViewArticles />} />
-          <Route exact path="newcategory" element={<NewCategory />} />
-          <Route exact path="viewads/:id" element={<Editad />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route path="/newad" element={<Newad />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/newarticle" element={<Newarticle />} />
+          <Route exact path="/viewads" element={<ViewAds />} />
+          <Route exact path="/viewartciles" element={<ViewArticles />} />
+          <Route exact path="/newcategory" element={<NewCategory />} />
+          <Route exact path="/viewads/:id" element={<Editad />} />
         </Routes>
       </BrowserRouter>
       <Notifications></Notifications>
