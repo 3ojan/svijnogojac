@@ -30,7 +30,7 @@ ReactDOM.render(
       <BrowserRouter history={history}>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="sidebar" element={<Sidebar />} />
+          <Route path="/sidebar" element={<Sidebar />} />
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="dashboard" element={<Dashboard />} />
           <Route path="newad" element={<Newad />} />
