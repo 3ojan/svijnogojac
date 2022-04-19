@@ -30,17 +30,17 @@ ReactDOM.render(
       <BrowserRouter history={history}>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="frontend/build/sidebar" element={<Sidebar />} />
-          <Route exact path="frontend/build/profile" element={<Profile />} />
-          <Route exact path="frontend/build/dashboard" element={<Dashboard />} />
-          <Route path="frontend/build/newad" element={<Newad />} />
-          <Route exact path="frontend/build/login" element={<Login />} />
-          <Route exact path="frontend/build/register" element={<Register />} />
-          <Route exact path="frontend/build/newarticle" element={<Newarticle />} />
-          <Route exact path="frontend/build/viewads" element={<ViewAds />} />
-          <Route exact path="frontend/build/viewartciles" element={<ViewArticles />} />
-          <Route exact path="frontend/build/newcategory" element={<NewCategory />} />
-          <Route exact path="frontend/build/viewads/:id" element={<Editad />} />
+          <Route path="build/sidebar" element={<Sidebar />} />
+          <Route exact path="build/profile" element={<Profile />} />
+          <Route exact path="build/dashboard" element={<Dashboard />} />
+          <Route path="build/newad" element={<Newad />} />
+          <Route exact path="build/login" element={<Login />} />
+          <Route exact path="build/register" element={<Register />} />
+          <Route exact path="build/newarticle" element={<Newarticle />} />
+          <Route exact path="build/viewads" element={<ViewAds />} />
+          <Route exact path="build/viewartciles" element={<ViewArticles />} />
+          <Route exact path="build/newcategory" element={<NewCategory />} />
+          <Route exact path="build/viewads/:id" element={<Editad />} />
         </Routes>
       </BrowserRouter>
       <Notifications></Notifications>
