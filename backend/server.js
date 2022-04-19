@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser")
 const { ObjectID } = require("mongodb");
 const saltRounds = 10;
 
+const path = require('path');
+
 var User = require('./models/user.js');
 var Ad = require('./models/ad.js');
 var Articles = require('./models/articles.js');
@@ -34,15 +36,14 @@ function isEmpty(str) {
   return !str || 0 === str.length
 }
 
-
+const dirname = path.resolve();
 // Express will serve up production assets
-app.use(express.static('/frontend/build'));
+app.use(express.static(path.join(dirname, '/frontend/build')));
 
 // Express serve up index.html file if it doesn't recognize route
-const path = require('path');
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/frontend/build/index.html'))
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(dirname, 'frontend', 'build', 'index.html'));
 })
 
 mongoose.set('useCreateIndex', true)
