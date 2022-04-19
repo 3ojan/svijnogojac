@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from "../../Sidebar/Sidebar";
 import { connect, useSelector } from 'react-redux';
-import { getUserAds } from '../../store/actions/userAction';
-import UserTable from '../../Tables/UserTable';
+import { getAdsByArticleId } from '../../store/actions/articleAction';
+import UserTable from '../../../../../src/components/Tables/UserTable';
 import { useNavigate, useParams } from 'react-router';
 import CardTable from '../../Tables/CardTable';
+import { getArticleName } from '../../store/reducers/articleReducer';
 // components
 
-function UserAds(props) {
+function ArticleAds(props) {
 
   const params = useParams();
   window.params = params;
 
-  const ads = useSelector(state => {
-    return state.articlesState.ads
-  });
-
-  const [userAds, setUserAds] = useState(null)
+  const [state, setState] = useState({
+    allAdsByArticle: null,
+    title: "",
+  })
 
   useEffect(() => {
     const callback = (response) => {
-      setUserAds(response);
+      const title = getArticleName(params.articleId)
+      setState({ ...state, allAdsByArticle: response, title });
     }
-    props.getUserAds(params.id, callback);
+    props.getAdsByArticleId(params.articleId, callback);
   }, []);
 
-  console.log(userAds)
+
 
 
   return (
@@ -48,8 +49,8 @@ function UserAds(props) {
 
               </div>
             </section> */}
-            {/* {filteredUsers && <UserTable data={filteredUsers} title={"Članovi"}></UserTable>} */}
-            {userAds && <CardTable title="Svi oglasi člana" color={"dark"} data={userAds}></CardTable>}
+            {/* {allAdsByArticle && <CardTable title="Svi oglasi člana" color={"dark"} data={userAds}></CardTable>} */}
+            {state.allAdsByArticle && <CardTable title={state.title} color={"dark"} data={state.allAdsByArticle}></CardTable>}
           </div>
         </div>
       </div >
@@ -58,4 +59,4 @@ function UserAds(props) {
 }
 
 const mapStateToProps = (state) => ({})
-export default connect(mapStateToProps, { getUserAds })(UserAds)
+export default connect(mapStateToProps, { getAdsByArticleId })(ArticleAds)

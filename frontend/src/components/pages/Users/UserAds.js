@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from "../../Sidebar/Sidebar";
 import { connect, useSelector } from 'react-redux';
-import { getAdsByArticleId } from '../../store/actions/articleAction';
-import UserTable from '../../Tables/UserTable';
+import { getUserAds } from '../../store/actions/userAction';
+import UserTable from '../../../../../src/components/Tables/UserTable';
 import { useNavigate, useParams } from 'react-router';
 import CardTable from '../../Tables/CardTable';
-import { getArticleName } from '../../store/reducers/articleReducer';
 // components
 
-function ArticleAds(props) {
+function UserAds(props) {
 
   const params = useParams();
   window.params = params;
 
-  const [state, setState] = useState({
-    allAdsByArticle: null,
-    title: "",
-  })
+  const ads = useSelector(state => {
+    return state.articlesState.ads
+  });
+
+  const [userAds, setUserAds] = useState(null)
 
   useEffect(() => {
     const callback = (response) => {
-      const title = getArticleName(params.articleId)
-      setState({ ...state, allAdsByArticle: response, title });
+      setUserAds(response);
     }
-    props.getAdsByArticleId(params.articleId, callback);
+    props.getUserAds(params.id, callback);
   }, []);
 
-
+  console.log(userAds)
 
 
   return (
@@ -49,8 +48,8 @@ function ArticleAds(props) {
 
               </div>
             </section> */}
-            {/* {allAdsByArticle && <CardTable title="Svi oglasi člana" color={"dark"} data={userAds}></CardTable>} */}
-            {state.allAdsByArticle && <CardTable title={state.title} color={"dark"} data={state.allAdsByArticle}></CardTable>}
+            {/* {filteredUsers && <UserTable data={filteredUsers} title={"Članovi"}></UserTable>} */}
+            {userAds && <CardTable title="Svi oglasi člana" color={"dark"} data={userAds}></CardTable>}
           </div>
         </div>
       </div >
@@ -59,4 +58,4 @@ function ArticleAds(props) {
 }
 
 const mapStateToProps = (state) => ({})
-export default connect(mapStateToProps, { getAdsByArticleId })(ArticleAds)
+export default connect(mapStateToProps, { getUserAds })(UserAds)

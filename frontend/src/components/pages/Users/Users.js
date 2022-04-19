@@ -3,7 +3,7 @@ import Sidebar from "../../Sidebar/Sidebar";
 import { connect, useSelector } from 'react-redux';
 import { getUsers } from '../../store/actions/userAction';
 import { getAdds } from '../../store/actions/articleAction';
-import UserTable from '../../Tables/UserTable';
+import UserTable from '../../../../../src/components/Tables/UserTable';
 // components
 
 function Users(props) {
