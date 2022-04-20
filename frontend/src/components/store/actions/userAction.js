@@ -19,7 +19,6 @@ const registerUserData = {
   lastName: "user"
 }
 
-
 let token = localStorage.getItem("svinje-token");
 
 export const login = () => async dispatch => {
