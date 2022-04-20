@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from "../../Sidebar/Sidebar";
 import { connect, useSelector } from 'react-redux';
-import { getAdds, getArticle, getCategories } from "../../store/actions/articleAction"
+import { getAdds, getArticle, getCategories } from "../../../../../src/components/store/actions/articleAction"
 import { getArticleName, getCategoryName } from '../../store/reducers/articleReducer';
-import TotalArticlesTable from '../../Tables/TotalArticlesTable';
+import TotalArticlesTable from '../../../../../src/components/Tables/TotalArticlesTable';
 import Dropdown from '../../dropdown/Dropdown';
 // components
 
