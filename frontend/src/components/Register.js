@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { login } from "./store/actions/userAction"
 import axios from "axios"
-import { useNavigate } from 'react-router';
 
 function Register(props) {
-  const history = useNavigate();
+
   const [inputData, setinputData] = useState({
     email: null,
     password: null,
@@ -54,8 +53,7 @@ function Register(props) {
   useEffect(() => {
   }, []);
 
-  const registerHandler = (e) => {
-    e.nativeEvent.preventDefault();
+  const registerHandler = () => {
     const registerUserData = {
       email: "test@test.hr",
       password: "1234",
@@ -67,10 +65,6 @@ function Register(props) {
       .then(res => {
         console.log(res)
         if (res.data.success === true) {
-          props.login({ email: inputData.email, password: inputData.password },
-            () => {
-              history('/viewads');
-            });
           // this.$store.commit('authUser')
           // this.$router.push({
           //   name: "Dashboard"

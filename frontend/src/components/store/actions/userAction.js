@@ -9,7 +9,7 @@ export const USERS_ERROR = 'USERS_ERROR';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 
-export const baseUrl = "http://localhost:2999";
+export const baseUrl = "https://immense-forest-19567.herokuapp.com";
 
 
 const registerUserData = {
@@ -22,14 +22,14 @@ const registerUserData = {
 
 let token = localStorage.getItem("svinje-token");
 
-export const login = (data, callback) => async dispatch => {
+export const login = () => async dispatch => {
   if (token) {
     axios.defaults.headers.common = {
       'Authorization': `Bearer ${token}`
     }
   }
   try {
-    axios.post(`${baseUrl}/login`, data)
+    axios.post(`${baseUrl}/login`, registerUserData)
       .then(res => {
         if (res.data.success === true) {
           if (res.data.token) {
@@ -44,14 +44,9 @@ export const login = (data, callback) => async dispatch => {
             type: USER_LOGIN_SUCCESS,
             payload: res.data
           });
-          callback && callback();
           // localStorage.setItem('token', res.data.token);
 
-        }
-        if (res.data.success === false) {
-          NotificationManager.error(res.data.message);
-        }
-        else {
+        } else {
         }
       })
   } catch (e) {
@@ -135,21 +130,6 @@ export const getUsers = () => async dispatch => {
         dispatch({
           type: "USERS_GET_FAILED",
         });
-        // console.error('onRejected function called: ' + error.message);
-      })
-};
-export const getUserAds = (id, callback) => async dispatch => {
-  axios.get(`${baseUrl}/getownerads/${id}`)
-    .then(res => {
-      if (res.data.success === true) {
-        NotificationManager.success("Oglasi učitani!");
-        callback(res.data.ads)
-      } else {
-        console.log(res)
-
-      }
-    },
-      error => {
         // console.error('onRejected function called: ' + error.message);
       })
 };

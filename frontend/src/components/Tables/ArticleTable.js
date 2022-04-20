@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getArticleName } from "../store/reducers/articleReducer";
-import { useNavigate } from 'react-router';
+
 // components
 
-const tableRow = (color, data, history) => {
+const tableRow = (color, data) => {
   console.log(data.name)
   return (<tr key={data._id}>
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
@@ -16,18 +16,11 @@ const tableRow = (color, data, history) => {
     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
       {data.categoryName}
     </td>
-    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      <button
-        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => { history(`/editarticle/${data._id}`) }}>{"Uredi"}
-      </button>
-    </td>
   </tr>)
 }
 
 export default function ArticleTable({ color, data }) {
-  const history = useNavigate();
+
   return (
     <>
       <div
@@ -88,7 +81,7 @@ export default function ArticleTable({ color, data }) {
               </tr>
             </thead>
             <tbody>
-              {data && data.map(item => tableRow(color, item, history))}
+              {data && data.map(item => tableRow(color, item))}
             </tbody>
           </table>
         </div>

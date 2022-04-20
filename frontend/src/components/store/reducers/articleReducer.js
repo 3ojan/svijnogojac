@@ -12,8 +12,6 @@ const initialState = {
 
 let names = {};
 let articles = [];
-let categoryNames = {};
-let categories = [];
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -37,7 +35,6 @@ const userReducer = (state = initialState, action) => {
         loading: false
       }
     case GET_CATEGORIES_SUCCESS:
-      categories = action.payload;
       return {
         ...state,
         categories: action.payload,
@@ -59,16 +56,6 @@ export const getArticleName = (id) => {
     names[id] = item[0].name
   }
   return names[id];
-}
-export const getCategoryName = (id) => {
-  if (categoryNames[id]) {
-    return categoryNames[id];
-  }
-  const item = categories.filter(item => item._id === id);
-  if (item[0]) {
-    categoryNames[id] = item[0].name
-  }
-  return categoryNames[id];
 }
 
 export default userReducer

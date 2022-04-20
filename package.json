@@ -1,0 +1,10 @@
+{
+  "engines": {
+    "node": "14.18.0"
+  },
+  "name": "svinjogojac",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend"
+  }
+}

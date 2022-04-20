@@ -111,7 +111,7 @@ function Newad(props) {
 
   const onSubmit = () => {
     const callback = () => {
-      history('/ponuda');
+      history('/viewads');
     }
     props.storeNewItem(submitData, callback);
   }
