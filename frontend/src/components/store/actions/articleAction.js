@@ -194,3 +194,62 @@ export const storeCategory = (item) => async dispatch => {
     // });
   }
 };
+
+export const getAdsByArticleId = (id, callback) => async dispatch => {
+  axios.get(`${baseUrl}/getarticleads/${id}`)
+    .then(res => {
+      if (res.data.success === true) {
+        NotificationManager.success("Oglasi učitani!");
+        callback(res.data.ads)
+      } else {
+        console.log(res)
+
+      }
+    },
+      error => {
+        // console.error('onRejected function called: ' + error.message);
+      })
+};
+export const updateArticle = (id, params, callback) => async dispatch => {
+  axios.post(`${baseUrl}/updatearticle/${id}`, params)
+    .then(res => {
+      if (res.data.success === true) {
+        NotificationManager.success("Artikal uređen");
+        callback(res.data.ads)
+      } else {
+        console.log(res)
+      }
+    },
+      error => {
+        // console.error('onRejected function called: ' + error.message);
+      })
+};
+export const deleteArticle = (id, callback) => async dispatch => {
+  axios.get(`${baseUrl}/deletearticle/${id}`)
+    .then(res => {
+      if (res.data.success === true) {
+        NotificationManager.success("Artikal obrisan");
+        callback(res.data.ads)
+      } else {
+        console.log(res)
+      }
+    },
+
+      error => {
+        // console.error('onRejected function called: ' + error.message);
+      })
+};
+export const getArticleById = (id, callback) => async dispatch => {
+  axios.get(`${baseUrl}/articles/${id}`)
+    .then(res => {
+      if (res.data.success === true) {
+        NotificationManager.success("Artikal učitan");
+        callback(res.data.ads)
+      } else {
+        console.log(res)
+      }
+    },
+      error => {
+        // console.error('onRejected function called: ' + error.message);
+      })
+};
