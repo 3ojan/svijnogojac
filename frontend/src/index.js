@@ -34,11 +34,11 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter history={history}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/sidebar" element={<Sidebar />} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/sidebar" element={<Sidebar />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route path="/newad" element={<Newad />} />
+          <Route exact path="/newad" element={<Newad />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/newarticle" element={<Newarticle />} />
