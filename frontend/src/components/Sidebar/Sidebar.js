@@ -121,21 +121,42 @@ function Sidebar(props) {
                 <a
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/viewads") !== -1
+                    (window.location.href.indexOf("/ponuda") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  onClick={() => { history('/viewads') }}
+                  onClick={() => { history('/ponuda') }}
                 >
                   <i
                     className={
                       "fas fa-tools mr-2 text-sm " +
-                      (window.location.href.indexOf("/viewads") !== -1
+                      (window.location.href.indexOf("/ponuda") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Pregled oglasa
+                  Ponuda
+                </a>
+              </li>
+              <li className="items-center">
+                <a
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/potraznja") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  onClick={() => { history('/potraznja') }}
+                >
+                  <i
+                    className={
+                      "fas fa-tools mr-2 text-sm " +
+                      (window.location.href.indexOf("/potraznja") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Potražnja
                 </a>
               </li>
             </ul>
@@ -157,7 +178,7 @@ function Sidebar(props) {
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  onClick={() => { history('/viewartciles') }}
+                  onClick={() => { history('/viewarticles') }}
                 >
                   <i
                     className={
@@ -175,7 +196,7 @@ function Sidebar(props) {
                 <a
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/newArticle") !== -1
+                    (window.location.href.indexOf("/newcategory") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
@@ -236,6 +257,7 @@ function Sidebar(props) {
               <li className="inline-flex">
                 <a
                   className="text-gray-800 hover:text-gray-600 text-sm block mb-4 no-underline font-semibold"
+                  onClick={() => { history('/users') }}
                 >
                   <i className="fab fa-css3-alt mr-2 text-gray-400 text-base"></i>
                   Pregled korisnika

@@ -22,11 +22,16 @@ import ViewArticles from './components/pages/Articles/ViewArticles';
 import NewCategory from './components/pages/insert/NewCategory';
 import Editad from './components/pages/Ads/Editad';
 import Notifications from './components/notifications/Notifications';
+import Ponuda from './components/pages/Ads/Ponuda';
+import Users from './components/pages/Users/Users';
+import UserAds from './components/pages/Users/UserAds';
+import ArticleAds from './components/pages/Users/ArticleAds';
+import Potraznja from './components/pages/Ads/Potraznja';
+import Editarticle from './components/pages/insert/Editarticle';
 
 ReactDOM.render(
   <App>
     <Provider store={store}>
-      <App></App>
       <BrowserRouter history={history}>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -38,9 +43,16 @@ ReactDOM.render(
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/newarticle" element={<Newarticle />} />
           <Route exact path="/viewads" element={<ViewAds />} />
-          <Route exact path="/viewartciles" element={<ViewArticles />} />
+          <Route exact path="/ponuda" element={<Ponuda />} />
+          <Route exact path="/potraznja" element={<Potraznja />} />
+          <Route exact path="/articleads/:articleId" element={<ArticleAds />} />
+          <Route exact path="/potraznja" element={<ViewAds />} />
+          <Route exact path="/viewarticles" element={<ViewArticles />} />
           <Route exact path="/newcategory" element={<NewCategory />} />
           <Route exact path="/viewads/:id" element={<Editad />} />
+          <Route exact path="/users" element={<Users />} />
+          <Route exact path="/userads/:id" element={<UserAds />} />
+          <Route exact path="/editarticle/:id" element={<Editarticle />} />
         </Routes>
       </BrowserRouter>
       <Notifications></Notifications>

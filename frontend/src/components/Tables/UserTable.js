@@ -1,32 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getArticleName } from "../store/reducers/articleReducer";
 import { useNavigate } from 'react-router';
+
 // components
 
+
 const tableRow = (color, data, history) => {
-  console.log(data.name)
-  return (<tr key={data._id}>
-    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      {getArticleName(data._id)}
-    </td>
-    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      {data.unit}
-    </td>
-    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      {data.categoryName}
-    </td>
-    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-      <button
-        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => { history(`/editarticle/${data._id}`) }}>{"Uredi"}
-      </button>
-    </td>
-  </tr>)
+  const { user } = data
+  return (
+    <tr
+      key={user._id}
+      onClick={() => { history(`/userads/${user._id}`) }}
+    >
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
+        <img
+          // src={require("./logo192.png")}
+          className="h-12 w-12 bg-white rounded-full border"
+          alt="..."
+        ></img>
+        <span
+          className={
+            "ml-3 font-bold " +
+            +(color === "light" ? "text-gray-700" : "text-white")
+          }
+        >
+          {user.firstName}
+        </span>
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+        {data.total}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+        {data.date}
+      </td>
+    </tr>)
 }
 
-export default function ArticleTable({ color, data }) {
+export default function UserTable({ color, data, title }) {
   const history = useNavigate();
   return (
     <>
@@ -45,7 +55,7 @@ export default function ArticleTable({ color, data }) {
                   (color === "light" ? "text-gray-800" : "text-white")
                 }
               >
-                Pregled artikala
+                {title}
               </h3>
             </div>
           </div>
@@ -63,7 +73,7 @@ export default function ArticleTable({ color, data }) {
                       : "bg-blue-800 text-blue-300 border-blue-700")
                   }
                 >
-                  Naziv artikla
+                  Korisnik
                 </th>
                 <th
                   className={
@@ -73,7 +83,7 @@ export default function ArticleTable({ color, data }) {
                       : "bg-blue-800 text-blue-300 border-blue-700")
                   }
                 >
-                  Jedinica
+                  Ukupno oglasa
                 </th>
                 <th
                   className={
@@ -83,7 +93,7 @@ export default function ArticleTable({ color, data }) {
                       : "bg-blue-800 text-blue-300 border-blue-700")
                   }
                 >
-                  Kategorija
+                  Datum zadnjeg unosa
                 </th>
               </tr>
             </thead>
@@ -97,10 +107,10 @@ export default function ArticleTable({ color, data }) {
   );
 }
 
-ArticleTable.defaultProps = {
+UserTable.defaultProps = {
   color: "light",
 };
 
-ArticleTable.propTypes = {
+UserTable.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),
 };
