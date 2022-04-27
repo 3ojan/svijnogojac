@@ -239,7 +239,6 @@ app.get("/backend/categories", (req, res) => {
     if (err) {
       throw new Error(`Can't get user data.`);
     }
-
     return res.status(200).send({
       success: true,
       categories
