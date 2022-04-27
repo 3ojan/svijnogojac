@@ -63,7 +63,7 @@ mongoose.connect(configDB.url, { useNewUrlParser: true, useUnifiedTopology: true
 
 // application main routes --------------------
 
-app.post("/register", (req, res, next) => {
+app.post("/api/register", (req, res, next) => {
   // making sure none of the fields are empty
   if (
     isEmpty(req.body.email) ||
@@ -122,7 +122,7 @@ app.post("/register", (req, res, next) => {
 
   })
 })
-app.post("/newad", (req, res, next) => {
+app.post("/api/newad", (req, res, next) => {
   // making sure none of the fields are empty
   console.log(req.body)
   if (
@@ -169,7 +169,7 @@ app.post("/newad", (req, res, next) => {
     }
   });
 });
-app.post("/newarticle", (req, res, next) => {
+app.post("/api/newarticle", (req, res, next) => {
   // making sure none of the fields are empty
   console.log(req.body)
   if (
@@ -207,7 +207,7 @@ app.post("/newarticle", (req, res, next) => {
   });
 });
 
-app.post("/newcategory", (req, res, next) => {
+app.post("/api/newcategory", (req, res, next) => {
   // making sure none of the fields are empty
   console.log(res.body)
   if (
@@ -234,7 +234,7 @@ app.post("/newcategory", (req, res, next) => {
     }
   });
 });
-app.get("/backend/categories", (req, res) => {
+app.get("/api/categories", (req, res) => {
   Category.find({}, (err, categories) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -247,7 +247,7 @@ app.get("/backend/categories", (req, res) => {
 });
 
 
-app.get("/articles", (req, res) => {
+app.get("/api/articles", (req, res) => {
   Articles.find({ active: true }, (err, articles) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -259,7 +259,7 @@ app.get("/articles", (req, res) => {
     })
   })
 });
-app.get("/articles/:articleId", (req, res) => {
+app.get("/api/articles/:articleId", (req, res) => {
   Articles.find({ _id: req.params.articleId, active: true }, (err, ads) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -270,7 +270,7 @@ app.get("/articles/:articleId", (req, res) => {
     })
   })
 });
-app.get("/ads", (req, res) => {
+app.get("/api/ads", (req, res) => {
   Ad.find({}, (err, ads) => {
     if (err) {
       throw new Error(`Can't get ads data.`);
@@ -282,7 +282,7 @@ app.get("/ads", (req, res) => {
     })
   })
 });
-app.post("/updateAds", (req, res) => {
+app.post("/api/updateAds", (req, res) => {
   var data = {
     entryDate: req.body.entryDate,
     owner: req.body.owner,
@@ -321,7 +321,7 @@ app.post("/updateAds", (req, res) => {
   }
 });
 
-app.get("/ads/:id", async (req, res) => {
+app.get("/api/ads/:id", async (req, res) => {
   let id = req.params.id;
   Ad.findById(id, function (err, result) {
     if (err) {
@@ -336,7 +336,7 @@ app.get("/ads/:id", async (req, res) => {
   });
 });
 
-app.get("/ads", (req, res) => {
+app.get("/api/ads", (req, res) => {
   Ad.find({}, (err, ads) => {
     if (err) {
       throw new Error(`Can't get ads data.`);
@@ -349,7 +349,7 @@ app.get("/ads", (req, res) => {
   })
 });
 
-app.get("/getownerads/:ownerId", (req, res) => {
+app.get("/api/getownerads/:ownerId", (req, res) => {
   Ad.find({ ownerId: req.params.ownerId }, (err, ads) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -361,7 +361,7 @@ app.get("/getownerads/:ownerId", (req, res) => {
   })
 });
 
-app.get("/getarticleads/:articleId", (req, res) => {
+app.get("/api/getarticleads/:articleId", (req, res) => {
   Ad.find({ article: req.params.articleId }, (err, ads) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -373,7 +373,7 @@ app.get("/getarticleads/:articleId", (req, res) => {
   })
 });
 
-app.get("/deletearticle/:articleId", (req, res) => {
+app.get("/api/deletearticle/:articleId", (req, res) => {
   Articles.findOneAndUpdate(
     { _id: req.params.articleId },
     { $set: { active: false } }, null
@@ -383,7 +383,7 @@ app.get("/deletearticle/:articleId", (req, res) => {
     })
   })
 });
-app.post("/updatearticle/:articleId", (req, res) => {
+app.post("/api/updatearticle/:articleId", (req, res) => {
   var data = {
     name: req.body.name,
     category: req.body.category,
@@ -402,11 +402,11 @@ app.post("/updatearticle/:articleId", (req, res) => {
   })
 });
 
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
   res.send('Hello from B!')
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   console.log("login")
   if (
     isEmpty(req.body.email) ||
@@ -464,7 +464,7 @@ app.post("/login", (req, res) => {
 })
 
 
-app.get("/logout", (req, res) => {
+app.get("/api/logout", (req, res) => {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
   // decode token
@@ -496,7 +496,7 @@ app.get("/logout", (req, res) => {
   }
 });
 
-app.get("/auth", (req, res) => {
+app.get("/api/auth", (req, res) => {
   // let token = req.cookies.access_token
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
   // decode token
@@ -527,7 +527,7 @@ app.get("/auth", (req, res) => {
 })
 
 
-app.get("/emails", (req, res) => {
+app.get("/api/emails", (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -545,7 +545,7 @@ app.get("/emails", (req, res) => {
   })
 })
 
-app.get("/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -557,7 +557,7 @@ app.get("/users", (req, res) => {
   })
 });
 
-app.get("/adsbyarticle/:article", (req, res) => {
+app.get("/api/adsbyarticle/:article", (req, res) => {
   console.log(req.params.article)
   Ad.find({ article: req.params.article }, (err, ads) => {
     if (err) {
