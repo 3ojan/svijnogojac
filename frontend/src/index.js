@@ -35,24 +35,24 @@ ReactDOM.render(
       <BrowserRouter history={history}>
         <Routes>
           <Route exact path="/" element={<Login />} />
-          <Route exact path="/sidebar" element={<Sidebar />} />
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/newad" element={<Newad />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/newarticle" element={<Newarticle />} />
-          <Route exact path="/viewads" element={<ViewAds />} />
-          <Route exact path="/ponuda" element={<Ponuda />} />
-          <Route exact path="/potraznja" element={<Potraznja />} />
-          <Route exact path="/articleads/:articleId" element={<ArticleAds />} />
-          <Route exact path="/potraznja" element={<ViewAds />} />
-          <Route exact path="/viewarticles" element={<ViewArticles />} />
-          <Route exact path="/newcategory" element={<NewCategory />} />
-          <Route exact path="/viewads/:id" element={<Editad />} />
-          <Route exact path="/users" element={<Users />} />
-          <Route exact path="/userads/:id" element={<UserAds />} />
-          <Route exact path="/editarticle/:id" element={<Editarticle />} />
+          <Route path="/sidebar" element={<Sidebar />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/newad" element={<Newad />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/newarticle" element={<Newarticle />} />
+          <Route path="/viewads" element={<ViewAds />} />
+          <Route path="/ponuda" element={<Ponuda />} />
+          <Route path="/potraznja" element={<Potraznja />} />
+          <Route path="/articleads/:articleId" element={<ArticleAds />} />
+          <Route path="/potraznja" element={<ViewAds />} />
+          <Route path="/viewarticles" element={<ViewArticles />} />
+          <Route path="/newcategory" element={<NewCategory />} />
+          <Route path="/viewads/:id" element={<Editad />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/userads/:id" element={<UserAds />} />
+          <Route path="/editarticle/:id" element={<Editarticle />} />
         </Routes>
       </BrowserRouter>
       <Notifications></Notifications>
