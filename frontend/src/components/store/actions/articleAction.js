@@ -110,7 +110,7 @@ export const editExistingAd = (item, callback) => async dispatch => {
 
 export const getAdById = (id, callback) => async dispatch => {
   try {
-    axios.get(`${baseUrl}/ads/${id}`)
+    axios.post(`${baseUrl}/ads/${id}`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Oglas učitan");
@@ -132,7 +132,7 @@ export const getAdById = (id, callback) => async dispatch => {
 
 export const getAdds = () => async dispatch => {
   try {
-    axios.get(`${baseUrl}/ads`)
+    axios.post(`${baseUrl}/ads`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Oglasi učitani");
@@ -153,7 +153,7 @@ export const getAdds = () => async dispatch => {
 
 export const getCategories = () => async dispatch => {
   try {
-    axios.get(`${baseUrl}/categories`)
+    axios.post(`${baseUrl}/categories`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Kategorije učitane");
@@ -196,7 +196,7 @@ export const storeCategory = (item) => async dispatch => {
 };
 
 export const getAdsByArticleId = (id, callback) => async dispatch => {
-  axios.get(`${baseUrl}/getarticleads/${id}`)
+  axios.post(`${baseUrl}/getarticleads/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Oglasi učitani!");
@@ -225,7 +225,7 @@ export const updateArticle = (id, params, callback) => async dispatch => {
       })
 };
 export const deleteArticle = (id, callback) => async dispatch => {
-  axios.get(`${baseUrl}/deletearticle/${id}`)
+  axios.post(`${baseUrl}/deletearticle/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Artikal obrisan");
@@ -239,7 +239,7 @@ export const deleteArticle = (id, callback) => async dispatch => {
       })
 };
 export const getArticleById = (id, callback) => async dispatch => {
-  axios.get(`${baseUrl}/articles/${id}`)
+  axios.post(`${baseUrl}/articles/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Artikal učitan");

@@ -234,7 +234,7 @@ app.post("/api/newcategory", (req, res, next) => {
     }
   });
 });
-app.get("/api/categories", (req, res) => {
+app.post("/api/categories", (req, res) => {
   Category.find({}, (err, categories) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -259,7 +259,7 @@ app.post("/api/articles", (req, res) => {
     })
   })
 });
-app.get("/api/articles/:articleId", (req, res) => {
+app.post("/api/articles/:articleId", (req, res) => {
   Articles.find({ _id: req.params.articleId, active: true }, (err, ads) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -270,7 +270,7 @@ app.get("/api/articles/:articleId", (req, res) => {
     })
   })
 });
-app.get("/api/ads", (req, res) => {
+app.post("/api/ads", (req, res) => {
   Ad.find({}, (err, ads) => {
     if (err) {
       throw new Error(`Can't get ads data.`);
@@ -321,7 +321,7 @@ app.post("/api/updateAds", (req, res) => {
   }
 });
 
-app.get("/api/ads/:id", async (req, res) => {
+app.post("/api/ads/:id", async (req, res) => {
   let id = req.params.id;
   Ad.findById(id, function (err, result) {
     if (err) {
@@ -336,7 +336,7 @@ app.get("/api/ads/:id", async (req, res) => {
   });
 });
 
-app.get("/api/ads", (req, res) => {
+app.post("/api/ads", (req, res) => {
   Ad.find({}, (err, ads) => {
     if (err) {
       throw new Error(`Can't get ads data.`);
@@ -349,7 +349,7 @@ app.get("/api/ads", (req, res) => {
   })
 });
 
-app.get("/api/getownerads/:ownerId", (req, res) => {
+app.post("/api/getownerads/:ownerId", (req, res) => {
   Ad.find({ ownerId: req.params.ownerId }, (err, ads) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -361,7 +361,7 @@ app.get("/api/getownerads/:ownerId", (req, res) => {
   })
 });
 
-app.get("/api/getarticleads/:articleId", (req, res) => {
+app.post("/api/getarticleads/:articleId", (req, res) => {
   Ad.find({ article: req.params.articleId }, (err, ads) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -373,7 +373,7 @@ app.get("/api/getarticleads/:articleId", (req, res) => {
   })
 });
 
-app.get("/api/deletearticle/:articleId", (req, res) => {
+app.post("/api/deletearticle/:articleId", (req, res) => {
   Articles.findOneAndUpdate(
     { _id: req.params.articleId },
     { $set: { active: false } }, null
@@ -402,7 +402,7 @@ app.post("/api/updatearticle/:articleId", (req, res) => {
   })
 });
 
-app.get("/api/test", (req, res) => {
+app.post("/api/test", (req, res) => {
   res.send('Hello from B!')
 });
 
@@ -464,7 +464,7 @@ app.post("/api/login", (req, res) => {
 })
 
 
-app.get("/api/logout", (req, res) => {
+app.post("/api/logout", (req, res) => {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
   // decode token
@@ -496,7 +496,7 @@ app.get("/api/logout", (req, res) => {
   }
 });
 
-app.get("/api/auth", (req, res) => {
+app.post("/api/auth", (req, res) => {
   // let token = req.cookies.access_token
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
   // decode token
@@ -527,7 +527,7 @@ app.get("/api/auth", (req, res) => {
 })
 
 
-app.get("/api/emails", (req, res) => {
+app.post("/api/emails", (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -545,7 +545,7 @@ app.get("/api/emails", (req, res) => {
   })
 })
 
-app.get("/api/users", (req, res) => {
+app.post("/api/users", (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
       throw new Error(`Can't get user data.`);
@@ -557,7 +557,7 @@ app.get("/api/users", (req, res) => {
   })
 });
 
-app.get("/api/adsbyarticle/:article", (req, res) => {
+app.post("/api/adsbyarticle/:article", (req, res) => {
   console.log(req.params.article)
   Ad.find({ article: req.params.article }, (err, ads) => {
     if (err) {
