@@ -9,8 +9,7 @@ export const USERS_ERROR = 'USERS_ERROR';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 
-export const baseUrl = ":5000/api";
-
+export const baseUrl = "/api";
 
 const registerUserData = {
   email: "test@test.hr",
