@@ -247,7 +247,7 @@ app.get("/api/categories", (req, res) => {
 });
 
 
-app.get("/api/articles", (req, res) => {
+app.post("/api/articles", (req, res) => {
   Articles.find({ active: true }, (err, articles) => {
     if (err) {
       throw new Error(`Can't get user data.`);

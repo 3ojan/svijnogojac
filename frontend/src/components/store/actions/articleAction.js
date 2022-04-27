@@ -41,7 +41,7 @@ export const storeArticle = (article) => async dispatch => {
 };
 export const getArticle = () => async dispatch => {
   try {
-    axios.get(`${baseUrl}/articles`)
+    axios.post(`${baseUrl}/articles`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Artikli učitani");
