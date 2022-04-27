@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { login } from "./store/actions/userAction"
+import { baseUrl, login } from "./store/actions/userAction"
 import axios from "axios"
 import { useNavigate } from 'react-router';
 
@@ -63,7 +63,7 @@ function Register(props) {
       lastName: "user"
     }
 
-    axios.post("http://localhost:2999/register", inputData || registerUserData)
+    axios.post(`${baseUrl}/register`, inputData || registerUserData)
       .then(res => {
         console.log(res)
         if (res.data.success === true) {
