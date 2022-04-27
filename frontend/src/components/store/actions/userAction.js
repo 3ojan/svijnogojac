@@ -65,7 +65,7 @@ export const auth = () => async dispatch => {
   axios.defaults.headers.common = {
     'Authorization': `Bearer ${token}`
   }
-  axios.get(`${baseUrl}/auth`)
+  axios.post(`${baseUrl}/auth`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Autorizacija uspješna!");
@@ -92,7 +92,7 @@ export const logout = (callback) => async dispatch => {
       'Authorization': `Bearer ${token}`
     }
   }
-  axios.get(`${baseUrl}/logout`)
+  axios.post(`${baseUrl}/logout`)
     .then(res => {
       if (res.data.success === true) {
         localStorage.removeItem("svinje-token");
@@ -117,7 +117,7 @@ export const logout = (callback) => async dispatch => {
 
 
 export const getUsers = () => async dispatch => {
-  axios.get(`${baseUrl}/users`)
+  axios.post(`${baseUrl}/users`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Korisnici učitani!");
@@ -138,7 +138,7 @@ export const getUsers = () => async dispatch => {
       })
 };
 export const getUserAds = (id, callback) => async dispatch => {
-  axios.get(`${baseUrl}/getownerads/${id}`)
+  axios.post(`${baseUrl}/getownerads/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Oglasi učitani!");
