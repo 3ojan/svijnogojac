@@ -234,7 +234,7 @@ app.post("/newcategory", (req, res, next) => {
     }
   });
 });
-app.get("/categories", (req, res) => {
+app.get("/backend/categories", (req, res) => {
   Category.find({}, (err, categories) => {
     if (err) {
       throw new Error(`Can't get user data.`);

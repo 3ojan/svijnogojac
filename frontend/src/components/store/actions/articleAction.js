@@ -153,7 +153,7 @@ export const getAdds = () => async dispatch => {
 
 export const getCategories = () => async dispatch => {
   try {
-    axios.get(`${baseUrl}/categories`)
+    axios.get(`${baseUrl}/backend/categories`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Kategorije učitane");
