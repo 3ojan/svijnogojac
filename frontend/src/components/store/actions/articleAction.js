@@ -41,7 +41,7 @@ export const storeArticle = (article) => async dispatch => {
 };
 export const getArticle = () => async dispatch => {
   try {
-    axios.post(`${baseUrl}/articles`)
+    axios.get(`${baseUrl}/articles`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Artikli učitani");
@@ -110,7 +110,7 @@ export const editExistingAd = (item, callback) => async dispatch => {
 
 export const getAdById = (id, callback) => async dispatch => {
   try {
-    axios.post(`${baseUrl}/ads/${id}`)
+    axios.get(`${baseUrl}/ads/${id}`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Oglas učitan");
@@ -132,7 +132,7 @@ export const getAdById = (id, callback) => async dispatch => {
 
 export const getAdds = () => async dispatch => {
   try {
-    axios.post(`${baseUrl}/ads`)
+    axios.get(`${baseUrl}/ads`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Oglasi učitani");
@@ -153,7 +153,7 @@ export const getAdds = () => async dispatch => {
 
 export const getCategories = () => async dispatch => {
   try {
-    axios.post(`${baseUrl}/categories`)
+    axios.get(`${baseUrl}/categories`)
       .then(res => {
         if (res.data.success === true) {
           NotificationManager.success("Kategorije učitane");
@@ -196,7 +196,7 @@ export const storeCategory = (item) => async dispatch => {
 };
 
 export const getAdsByArticleId = (id, callback) => async dispatch => {
-  axios.post(`${baseUrl}/getarticleads/${id}`)
+  axios.get(`${baseUrl}/getarticleads/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Oglasi učitani!");
@@ -225,7 +225,7 @@ export const updateArticle = (id, params, callback) => async dispatch => {
       })
 };
 export const deleteArticle = (id, callback) => async dispatch => {
-  axios.post(`${baseUrl}/deletearticle/${id}`)
+  axios.get(`${baseUrl}/deletearticle/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Artikal obrisan");
@@ -239,7 +239,7 @@ export const deleteArticle = (id, callback) => async dispatch => {
       })
 };
 export const getArticleById = (id, callback) => async dispatch => {
-  axios.post(`${baseUrl}/articles/${id}`)
+  axios.get(`${baseUrl}/articles/${id}`)
     .then(res => {
       if (res.data.success === true) {
         NotificationManager.success("Artikal učitan");
